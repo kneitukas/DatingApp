@@ -47,7 +47,6 @@ namespace DatingApp.API.Controllers
         }
 
         [HttpPost("login")]
-
         public async Task<IActionResult> Login(UserForLoginDto userForLoginDto)
         {
             var username = userForLoginDto.Username;
@@ -66,7 +65,7 @@ namespace DatingApp.API.Controllers
 
             var key = new SymmetricSecurityKey(Encoding.UTF8
             .GetBytes(_config.GetSection("AppSettings:Token").Value));
-
+            
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
 
             var tokenDescriptor = new SecurityTokenDescriptor
@@ -79,6 +78,10 @@ namespace DatingApp.API.Controllers
             var tokenHandler = new JwtSecurityTokenHandler();
 
             var token = tokenHandler.CreateToken(tokenDescriptor); 
+
+            return Ok(new {
+                token = tokenHandler.WriteToken(token)
+            });
         }
     }
 }
