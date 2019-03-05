@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
   <a class="navbar-brand" href="#">Datting App</a>
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
@@ -11,9 +11,32 @@
         <a class="nav-link disabled" href="#">Messages</a>
       </li>
     </ul>
-    <form [formGroup]="form" class="form-inline mt-2 mt-md-0" (ngSubmit)="login(form)">
+
+    <div *ngIf="loggedIn()" class="dropdown">
+        <a class="dropdown-toggle text-light">
+         Welcome {{form.value.username}}
+        </a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="#"><i class='fa fa-user'></i> Edit Profile</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#"><i class='fa fa-sign-out'></i> Logout</a>
+        </div>
+        <button (click)="logout()" class="btn btn-outline-success my-2 mx-4 my-sm-0" type="submit">Logout</button>
+      </div>
+
+    <form *ngIf="!loggedIn()" [formGroup]="form" class="form-inline mt-2 mt-md-0" (ngSubmit)="login(form)">
       <input class="form-control mr-sm-2" type="text" formControlName="username" placeholder="Username">
       <input class="form-control mr-sm-2" type="password" formControlName="password"  placeholder="Password">
       <button [disabled]="!form.valid" class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
     </form>
 </nav>
+
+<!-- <mat-toolbar color='primary'>
+  <span>Datting App</span>
+  <span class='spacer'></span>
+  <mat-nav-list fxLayout='row'>
+    <a mat-list-item>Matches</a>
+    <a mat-list-item>Lists</a>
+    <a mat-list-item>Messages</a>
+  </mat-nav-list>
+  </mat-toolbar> -->

@@ -23,10 +23,23 @@ export class NavbarComponent implements OnInit {
 
   login() {
   this.auth.login(this.form.value).subscribe(
-    response => {
-      console.log(response);
+    next => {
+      console.log('Logged in successfully');
+    },
+    error => {
+      console.log('failed to login');
     }
-  )
+  );
+  }
+
+  loggedIn() {
+    const token = localStorage.getItem('token');
+    return !!token;
+  }
+
+  logout() {
+    localStorage.removeItem('token');
+    console.log('logged out');
   }
 
 }
