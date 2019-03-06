@@ -25,7 +25,7 @@ namespace DatingApp.API.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register(UserForRegisterDto userForRegisterDto)
+        public async Task<IActionResult> Register(UserForRegisterDto userForRegisterDto) 
         {
             // TODO validate request
             var username = userForRegisterDto.Username;
@@ -46,7 +46,7 @@ namespace DatingApp.API.Controllers
             return StatusCode(201);
         }
 
-        [HttpPost("login")]
+        [HttpPost("login")] 
         public async Task<IActionResult> Login(UserForLoginDto userForLoginDto)
         {
             throw new Exception("Computer says no!");

@@ -28,8 +28,8 @@ export class RegisterComponent implements OnInit {
         console.log('Registration successfull');
         this.router.navigateByUrl('/');
       },
-      error => {
-        console.log('something went wrong with registration ');
+      (error) => {
+        console.log(error);
       }
     );
   }

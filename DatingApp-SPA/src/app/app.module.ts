@@ -9,6 +9,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ErrorInterceptorProvider } from './services/error.interceptor';
 
 @NgModule({
    declarations: [
@@ -25,7 +26,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
       ReactiveFormsModule,
       BrowserAnimationsModule,
    ],
-   providers: [],
+   providers: [
+     ErrorInterceptorProvider
+   ],
    bootstrap: [
       AppComponent
    ]
