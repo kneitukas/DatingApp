@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -16,8 +16,8 @@ export class RegisterComponent implements OnInit {
       username: [''],
       password: ['']
     });
+    this.values = this.auth.getValues();
   }
-
 
   ngOnInit() {
   }

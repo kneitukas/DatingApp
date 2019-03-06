@@ -9,9 +9,6 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule } from './shared/material/material.module';
-import { FlexLayoutModule } from '@angular/flex-layout';
-
 
 @NgModule({
    declarations: [
@@ -27,8 +24,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
       FormsModule,
       ReactiveFormsModule,
       BrowserAnimationsModule,
-      MaterialModule,
-      FlexLayoutModule
    ],
    providers: [],
    bootstrap: [

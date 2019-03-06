@@ -12,7 +12,6 @@ export class HomeComponent implements OnInit {
   values;
 
   constructor(public router: Router, private auth: AuthService) {
-    this.values = this.auth.getValues();
   }
 
   ngOnInit() {
