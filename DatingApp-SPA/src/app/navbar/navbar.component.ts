@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { User } from '../Models/User';
 import { AuthService } from '../services/auth.service';
+import { AlertifyService } from '../services/alertify.service';
 
 
 @Component({
@@ -11,7 +12,9 @@ import { AuthService } from '../services/auth.service';
 })
 export class NavbarComponent implements OnInit {
   form: FormGroup;
-  constructor(fb: FormBuilder, private auth: AuthService) {
+  token;
+  username;
+  constructor(fb: FormBuilder, private auth: AuthService, private alertify: AlertifyService) {
     this.form = fb.group({
       username: [''],
       password: ['']
@@ -19,12 +22,15 @@ export class NavbarComponent implements OnInit {
    }
 
   ngOnInit() {
+    this.token = this.auth.decodeToken();
+    console.log(this.token)
+    this.username = this.token.unique_name;
   }
 
   login() {
   this.auth.login(this.form.value).subscribe(
     next => {
-      console.log('Logged in successfully');
+      this.alertify.success('Successfuly logged in!');
     },
     error => {
       console.log(error);
@@ -33,13 +39,15 @@ export class NavbarComponent implements OnInit {
   }
 
   loggedIn() {
-    const token = localStorage.getItem('token');
-    return !!token;
+    const token = this.auth.loggedIn();
+    return !token;
+    return this.auth.loggedIn();
   }
 
   logout() {
-    localStorage.removeItem('token');
-    console.log('logged out');
+    this.auth.logout();
+    this.loggedIn();
+    this.alertify.message('Successfuly logged out!');
   }
 
 }

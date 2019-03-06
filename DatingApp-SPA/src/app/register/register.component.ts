@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AlertifyService } from '../services/alertify.service';
 
 @Component({
   selector: 'app-register',
@@ -11,7 +12,7 @@ import { Router } from '@angular/router';
 export class RegisterComponent implements OnInit {
   values;
   form: FormGroup;
-  constructor(private auth: AuthService, fb: FormBuilder, private router: Router) {
+  constructor(private auth: AuthService, fb: FormBuilder, private router: Router, private alertify: AlertifyService) {
     this.form = fb.group({
       username: [''],
       password: ['']
@@ -25,7 +26,7 @@ export class RegisterComponent implements OnInit {
   register() {
     this.auth.register(this.form.value).subscribe(
       next => {
-        console.log('Registration successfull');
+        this.alertify.success("Registration successfull");
         this.router.navigateByUrl('/');
       },
       (error) => {
