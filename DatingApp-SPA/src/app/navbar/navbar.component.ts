@@ -3,6 +3,7 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 import { User } from '../Models/User';
 import { AuthService } from '../services/auth.service';
 import { AlertifyService } from '../services/alertify.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -13,7 +14,7 @@ import { AlertifyService } from '../services/alertify.service';
 export class NavbarComponent implements OnInit {
   form: FormGroup;
   token;
-  constructor(fb: FormBuilder, private auth: AuthService, private alertify: AlertifyService) {
+  constructor(fb: FormBuilder, private auth: AuthService, private alertify: AlertifyService, private router: Router) {
     this.form = fb.group({
       username: [''],
       password: ['']
@@ -29,9 +30,13 @@ export class NavbarComponent implements OnInit {
     next => {
       this.token = this.auth.getToken();
       this.alertify.success('Successfuly logged in!');
+      // this.router.navigateByUrl('/members');
     },
     error => {
       console.log(error);
+    },
+    () => {
+      this.router.navigate(['/members']);
     }
   );
   }
@@ -43,6 +48,7 @@ export class NavbarComponent implements OnInit {
 
   logout() {
     this.auth.logout();
+    this.router.navigateByUrl('/');
     this.alertify.message('Successfuly logged out!');
   }
 

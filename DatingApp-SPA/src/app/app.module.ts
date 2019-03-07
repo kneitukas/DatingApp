@@ -11,13 +11,19 @@ import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ErrorInterceptorProvider } from './services/error.interceptor';
+import { MemberListComponent } from './member-list/member-list.component';
+import { ListsComponent } from './lists/lists.component';
+import { MessagesComponent } from './messages/messages.component';
 
 @NgModule({
    declarations: [
       AppComponent,
       NavbarComponent,
       HomeComponent,
-      RegisterComponent
+      RegisterComponent,
+      MemberListComponent,
+      ListsComponent,
+      MessagesComponent
    ],
    imports: [
       BrowserModule,
@@ -29,7 +35,7 @@ import { ErrorInterceptorProvider } from './services/error.interceptor';
       BsDropdownModule.forRoot()
    ],
    providers: [
-     ErrorInterceptorProvider
+      ErrorInterceptorProvider
    ],
    bootstrap: [
       AppComponent
