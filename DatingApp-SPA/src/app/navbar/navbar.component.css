@@ -1,4 +1,13 @@
 .dropdown {
   display: flex;
   align-items: center;
+  cursor: pointer;
+  user-select: none;
+}
+
+.dropdown-menu {
+  top: 37px !important;
+}
+.navbar-expand-md {
+  justify-content: space-between ;
 }

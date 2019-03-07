@@ -13,7 +13,6 @@ import { AlertifyService } from '../services/alertify.service';
 export class NavbarComponent implements OnInit {
   form: FormGroup;
   token;
-  username;
   constructor(fb: FormBuilder, private auth: AuthService, private alertify: AlertifyService) {
     this.form = fb.group({
       username: [''],
@@ -22,14 +21,13 @@ export class NavbarComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.token = this.auth.decodeToken();
-    console.log(this.token)
-    this.username = this.token.unique_name;
+    this.token = this.auth.getToken();
   }
 
   login() {
   this.auth.login(this.form.value).subscribe(
     next => {
+      this.token = this.auth.getToken();
       this.alertify.success('Successfuly logged in!');
     },
     error => {
@@ -41,12 +39,10 @@ export class NavbarComponent implements OnInit {
   loggedIn() {
     const token = this.auth.loggedIn();
     return !token;
-    return this.auth.loggedIn();
   }
 
   logout() {
     this.auth.logout();
-    this.loggedIn();
     this.alertify.message('Successfuly logged out!');
   }
 

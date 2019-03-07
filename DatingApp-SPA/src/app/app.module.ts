@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -25,6 +26,7 @@ import { ErrorInterceptorProvider } from './services/error.interceptor';
       FormsModule,
       ReactiveFormsModule,
       BrowserAnimationsModule,
+      BsDropdownModule.forRoot()
    ],
    providers: [
      ErrorInterceptorProvider

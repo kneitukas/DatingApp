@@ -8,9 +8,9 @@ export class AlertifyService {
 
   constructor() { }
 
-  confirm( message: string, okCb: () => any){
+  confirm( message: string, okCb: () => any) {
     alertify.confirm(message, (e) => {
-      if(e) {
+      if (e) {
         okCb();
       }
     });

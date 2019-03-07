@@ -9,7 +9,8 @@ import { Observable, Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-  jwtHelper = new JwtHelperService()
+  jwtHelper = new JwtHelperService();
+  decodedToken: any;
 
   constructor(private http: HttpClient) { }
 
@@ -19,6 +20,7 @@ export class AuthService {
        const user = response;
        if (user) {
          localStorage.setItem('token', user.token);
+         this.decodedToken = this.jwtHelper.decodeToken(user.token);
        }
      })
    );
@@ -41,9 +43,13 @@ export class AuthService {
     return this.http.get('http://localhost:5000/api/values');
   }
 
-  decodeToken() {
+  getToken() {
     const token = localStorage.getItem('token');
-    return this.jwtHelper.decodeToken(token);
+    if (token) {
+      return this.jwtHelper.decodeToken(token);
+    }
+    return;
+
   }
 
 }
