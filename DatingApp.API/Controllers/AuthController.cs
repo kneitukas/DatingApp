@@ -20,7 +20,7 @@ namespace DatingApp.API.Controllers
         private readonly IConfiguration _config;
         public AuthController(IAuthRepository repo, IConfiguration config)
         {
-            _config = config;
+            _config = config; 
             _repo = repo;
         }
 
@@ -28,7 +28,7 @@ namespace DatingApp.API.Controllers
         public async Task<IActionResult> Register(UserForRegisterDto userForRegisterDto) 
         {
             // TODO validate request
-            var username = userForRegisterDto.Username;
+            var username = userForRegisterDto.Username; 
             var password = userForRegisterDto.Password;
 
             username = username.ToLower();
