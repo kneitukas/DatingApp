@@ -4,8 +4,9 @@ import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { ListsComponent } from './lists/lists.component';
 import { MessagesComponent } from './messages/messages.component';
-import { MemberListComponent } from './member-list/member-list.component';
+import { MemberListComponent } from './members/member-list/member-list.component';
 import { AuthGuard } from './services/guards/auth.guard';
+import { MemberDetailComponent } from './members/member-detail/member-detail.component';
 
 const routes: Routes = [
 
@@ -22,6 +23,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       { path: 'members', component: MemberListComponent},
+      { path: 'members/:id', component: MemberDetailComponent},
       { path: 'lists', component: ListsComponent},
       { path: 'messages', component: MessagesComponent},
       { path: '**', redirectTo: '', pathMatch: 'full' }

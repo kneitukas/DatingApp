@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
-import { User } from '../Models/User';
 import { AuthService } from '../services/auth.service';
 import { AlertifyService } from '../services/alertify.service';
 import { Router } from '@angular/router';
@@ -30,13 +29,14 @@ export class NavbarComponent implements OnInit {
     next => {
       this.token = this.auth.getToken();
       this.alertify.success('Successfuly logged in!');
-      // this.router.navigateByUrl('/members');
+      this.router.navigateByUrl('/members');
     },
     error => {
-      console.log(error);
+      console.log('error');
     },
     () => {
-      this.router.navigate(['/members']);
+      console.log('completed');
+      // this.router.navigate(['/members']);
     }
   );
   }
