@@ -9,6 +9,9 @@ import { AuthGuard } from './services/guards/auth.guard';
 import { MemberDetailComponent } from './members/member-detail/member-detail.component';
 import { MemberDetailResolver } from './services/_resolvers/member-detail.resolver';
 import { MemberListResolver } from './services/_resolvers/member-list.resolver';
+import { MemberEditComponent } from './members/member-edit/member-edit.component';
+import { MemberEditResolver } from './services/_resolvers/member-edit.resolver';
+import { ChangesGuard } from './services/guards/changes.guard';
 
 const routes: Routes = [
 
@@ -26,6 +29,7 @@ const routes: Routes = [
     children: [
       { path: 'members', component: MemberListComponent, resolve: {users: MemberListResolver}},
       { path: 'members/:id', component: MemberDetailComponent, resolve: {user: MemberDetailResolver}},
+      { path: 'member/edit', component: MemberEditComponent, resolve: {user: MemberEditResolver}, canDeactivate: [ChangesGuard]},
       { path: 'lists', component: ListsComponent},
       { path: 'messages', component: MessagesComponent},
       { path: '**', redirectTo: '', pathMatch: 'full' }

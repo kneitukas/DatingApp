@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { map } from 'rxjs/operators';
@@ -10,12 +10,18 @@ import { User } from '../_models/User';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class AuthService implements OnInit {
   baseUrl = environment.apiUrl;
   jwtHelper = new JwtHelperService();
   decodedToken: any;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.decodedToken = this.getToken();
+   }
+
+   ngOnInit() {
+
+   }
 
   login(data: User) {
    return this.http.post(`${this.baseUrl}auth/login/`, data ).pipe(
@@ -52,7 +58,6 @@ export class AuthService {
       return this.jwtHelper.decodeToken(token);
     }
     return;
-
   }
 
 }

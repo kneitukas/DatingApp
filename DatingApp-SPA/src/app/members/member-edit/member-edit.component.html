@@ -1,0 +1,68 @@
+<div class="container mt-4">
+    <div class="row">
+      <div class="col-sm-4">
+          <h1 class='mb-4'>Your Profile</h1>
+      </div>
+      <div class="col-sm-8">
+        <div class="alert alert-info" *ngIf="form.dirty">
+          <strong>Information:</strong> You have made changes. Any unsaved changes will be lost!
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="card">
+            <img class='card-image-top img-thumbnail' [src]="user.photoUrl" [alt]="user.knownAs">
+            <div class="card-body">
+              <div>
+                <strong>Location:</strong>
+                <p>{{user.city}}, {{user?.country}}</p>
+              </div>
+              <div>
+                <strong>Age:</strong>
+                <p>{{user.age}}</p>
+              </div>
+              <div>
+                <strong>Last Active:</strong>
+                <p>{{user.lastActive | date}}</p>
+              </div>
+              <div>
+                <strong>Member Since:</strong>
+                <p>{{user.created | date}}</p>
+              </div>
+            </div>
+            <div class="card-footer">
+                <button [disabled]='!form.dirty' class="btn btn-success btn-block" form="editForm">Save Changes</button>
+            </div>
+        </div>
+      </div>
+      <div class="col-sm-8">
+          <div class='tab-panel'>
+              <tabset class='member-tabset'>
+                <tab heading="Edit Profile">
+
+                  <form [formGroup]='form' id='editForm' (ngSubmit)='updateUser()'>
+                      <h4>Description</h4>
+                      <textarea rows='6' class='form-control' formControlName="introduction">{{user.introduction}}</textarea>
+                    <h4>Looking For</h4>
+                      <textarea rows='6' class='form-control' formControlName="lookingFor">{{user.lookingFor}}</textarea>
+                    <h4>Interests</h4>
+                      <textarea rows='6' class='form-control' formControlName="interests">{{user.interests}}</textarea>
+                    <h4>Location Details</h4>
+                      <div class="form-inline">
+                        <label for="city">City</label>
+                        <input type="text" class="form-control" formControlName="city">
+                        <input type="text" class="form-control" formControlName="country">
+                      </div>
+                  </form>
+                </tab>
+                <tab heading="Edit Photos">
+                  <h4>Interests</h4>
+                 <p>{{user.interests}}</p>
+                </tab>
+              </tabset>
+            </div>
+      </div>
+    </div>
+  </div>
+

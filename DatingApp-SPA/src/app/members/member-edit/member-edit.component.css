@@ -1,7 +1,4 @@
 
-img {
-  width:100% ;
-}
 
 .img-thumbnail {
   margin: 25px;
@@ -20,8 +17,7 @@ img {
 }
 
 .member-tabset h4 {
-  margin: 10px 0;
+  margin: 1rem 0;
 }
-
 
 
