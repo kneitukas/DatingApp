@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { AlertifyService } from '../../services/alertify.service';
 import { User } from '../../_models/User';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-member-list',
@@ -12,23 +13,15 @@ import { User } from '../../_models/User';
 export class MemberListComponent implements OnInit {
   users: User[];
 
-  constructor(private userService: UserService, private alertify: AlertifyService) {
-    this.userService.getUsers().subscribe(
-      (user: User[]) => {
-        this.users = user;
-      },
-      error => {
-        this.alertify.error(error);
-      }
-    );
+  constructor(private router: ActivatedRoute) {
   }
 
   ngOnInit() {
-    this.loadUsers();
-  }
-
-  loadUsers() {
-
+    this.router.data.subscribe(
+      data => {
+        this.users = data.users;
+      }
+    );
   }
 
 }

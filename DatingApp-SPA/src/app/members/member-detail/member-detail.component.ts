@@ -3,6 +3,7 @@ import { User } from 'src/app/_models/User';
 import { UserService } from 'src/app/services/user.service';
 import { AlertifyService } from 'src/app/services/alertify.service';
 import { ActivatedRoute } from '@angular/router';
+import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation } from 'ngx-gallery';
 
 
 @Component({
@@ -11,24 +12,57 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./member-detail.component.scss']
 })
 export class MemberDetailComponent implements OnInit {
-  @ViewChild('tab') tab;
+  galleryOptions: NgxGalleryOptions[];
+  galleryImages: NgxGalleryImage[];
+
   @Input() user: User;
-  constructor(private userService: UserService, private alertify: AlertifyService, private route: ActivatedRoute) { }
+
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.loadUser();
-    console.log(this.tab)
-  }
-
-  loadUser() {
-    this.userService.getUser(this.route.snapshot.params.id).subscribe(
-      user => {
-        this.user = user;
-      },
-      error => {
-        this.alertify.error(error);
+    this.route.data.subscribe(
+      data => {
+        this.user = data.user;
       }
     );
-  }
 
+    this.galleryOptions = [
+      {
+          width: '500px',
+          height: '500px',
+          imagePercent: 100,
+          thumbnailsColumns: 4,
+          imageAnimation: NgxGalleryAnimation.Fade,
+          preview: false
+      },
+      // max-width 800
+      {
+          breakpoint: 800,
+          width: '100%',
+          height: '600px',
+          imagePercent: 80,
+          thumbnailsPercent: 20,
+          thumbnailsMargin: 20,
+          thumbnailMargin: 20
+      },
+      // max-width 400
+      {
+          breakpoint: 400,
+          preview: false
+      }
+  ];
+    this.galleryImages = this.getImages();
+  }
+  getImages() {
+    const imageUrls = [];
+    this.user.photos.forEach( photo => {
+      imageUrls.push({
+        small: photo.url,
+        medium: photo.url,
+        big: photo.url,
+        description: photo.description
+      });
+    });
+    return imageUrls;
+  }
 }

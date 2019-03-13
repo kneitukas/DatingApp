@@ -7,6 +7,8 @@ import { MessagesComponent } from './messages/messages.component';
 import { MemberListComponent } from './members/member-list/member-list.component';
 import { AuthGuard } from './services/guards/auth.guard';
 import { MemberDetailComponent } from './members/member-detail/member-detail.component';
+import { MemberDetailResolver } from './services/_resolvers/member-detail.resolver';
+import { MemberListResolver } from './services/_resolvers/member-list.resolver';
 
 const routes: Routes = [
 
@@ -22,8 +24,8 @@ const routes: Routes = [
     runGuardsAndResolvers: 'always',
     canActivate: [AuthGuard],
     children: [
-      { path: 'members', component: MemberListComponent},
-      { path: 'members/:id', component: MemberDetailComponent},
+      { path: 'members', component: MemberListComponent, resolve: {users: MemberListResolver}},
+      { path: 'members/:id', component: MemberDetailComponent, resolve: {user: MemberDetailResolver}},
       { path: 'lists', component: ListsComponent},
       { path: 'messages', component: MessagesComponent},
       { path: '**', redirectTo: '', pathMatch: 'full' }
